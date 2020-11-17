@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <assert.h>
+#include <omp.h>
 
 #define MAX_BRIGHTNESS 255
 
@@ -466,6 +467,9 @@ pixel_t *canny_edge_detection(const pixel_t *in,
 
 int main(const int argc, const char **const argv)
 {
+	double start, end;
+	start = omp_get_wtime();
+
 	if (argc < 2)
 	{
 		printf("Usage: %s image.bmp\n", argv[0]);
@@ -498,5 +502,7 @@ int main(const int argc, const char **const argv)
 
 	free((pixel_t *)in_bitmap_data);
 	free((pixel_t *)out_bitmap_data);
+	end = omp_get_wtime();
+	printf("time: %lfs", end-start);
 	return 0;
 }
