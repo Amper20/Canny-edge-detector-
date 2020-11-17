@@ -469,40 +469,39 @@ int main(const int argc, const char **const argv)
 {
 	double start, end;
 	start = omp_get_wtime();
+	for(int i = 0; i < 80; i++) {
+		char file_name[20], out_file_name[20];
+		
+		sprintf(file_name, "frames/%d.bmp", i);
+		sprintf(out_file_name, "frames_out/%d.bmp", i);
+		
+		static bitmap_info_header_t ih;
+		const pixel_t *in_bitmap_data = load_bmp(file_name, &ih);
+		if (in_bitmap_data == NULL)
+		{
+			fprintf(stderr, "main: BMP image not loaded.\n");
+			return 1;
+		}
 
-	if (argc < 2)
-	{
-		printf("Usage: %s image.bmp\n", argv[0]);
-		return 1;
+		printf("Info: %d x %d x %d\n", ih.width, ih.height, ih.bitspp);
+
+		const pixel_t *out_bitmap_data =
+			canny_edge_detection(in_bitmap_data, &ih, 45, 50, 1.0f);
+		if (out_bitmap_data == NULL)
+		{
+			fprintf(stderr, "main: failed canny_edge_detection.\n");
+			return 1;
+		}
+
+		if (save_bmp(out_file_name, &ih, out_bitmap_data))
+		{
+			fprintf(stderr, "main: BMP image not saved.\n");
+			return 1;
+		}		
+		free((pixel_t *)in_bitmap_data);
+		free((pixel_t *)out_bitmap_data);
 	}
-
-	static bitmap_info_header_t ih;
-	const pixel_t *in_bitmap_data = load_bmp(argv[1], &ih);
-	if (in_bitmap_data == NULL)
-	{
-		fprintf(stderr, "main: BMP image not loaded.\n");
-		return 1;
-	}
-
-	printf("Info: %d x %d x %d\n", ih.width, ih.height, ih.bitspp);
-
-	const pixel_t *out_bitmap_data =
-	    canny_edge_detection(in_bitmap_data, &ih, 45, 50, 1.0f);
-	if (out_bitmap_data == NULL)
-	{
-		fprintf(stderr, "main: failed canny_edge_detection.\n");
-		return 1;
-	}
-
-	if (save_bmp("out.bmp", &ih, out_bitmap_data))
-	{
-		fprintf(stderr, "main: BMP image not saved.\n");
-		return 1;
-	}
-
-	free((pixel_t *)in_bitmap_data);
-	free((pixel_t *)out_bitmap_data);
 	end = omp_get_wtime();
-	printf("time: %lfs", end-start);
+	printf("Time: %lf\n", end - start);
 	return 0;
 }
