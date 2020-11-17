@@ -502,6 +502,6 @@ int main(const int argc, const char **const argv)
 		free((pixel_t *)out_bitmap_data);
 	}
 	end = omp_get_wtime();
-	printf("Time: %f\n", end - start);
+	printf("Time: %lf\n", end - start);
 	return 0;
 }
