@@ -7,11 +7,22 @@ Command used to convert jpg to bmp:
 python3 Video2Frame.py
 sudo apt-get install graphicsmagick-imagemagick-compat
 mogrify -compress None -format bmp frames/*.png
-```
-Compile: 
 
-```gcc -fopenmp -o ced_serial ced_serial.c -lm```
+```
+# Serial
 
 Run on queue: 
 
 ```qsub -q ibm-nehalem.q -pe openmpi 1 -cwd ./run.sh```
+
+# pthreads
+
+Run on queue: 
+
+- 1 thread
+
+```qsub -q ibm-nehalem.q -pe openmpi 1 -cwd ./run_pthreads1.sh```
+
+- 12 threads
+
+```qsub -q ibm-nehalem.q -pe openmpi 12 -cwd ./run_pthreads12.sh```

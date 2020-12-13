@@ -1,0 +1,1 @@
+./ced_pthreads 1

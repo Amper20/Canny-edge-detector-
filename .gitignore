@@ -1,1 +1,7 @@
 run.sh.*
+run_openmp.sh.*
+run_pthreads*.sh.*
+ced_openmp
+ced_pthreads
+ced_serial
+frames_out/
