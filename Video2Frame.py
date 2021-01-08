@@ -1,8 +1,8 @@
 import cv2
 vidcap = cv2.VideoCapture('videoplayback.webm')
 success,image = vidcap.read()
-count = 0
-idx = 0
+count = 1
+idx = 5
 while success and idx <= 2:
     if(count % 50 == 0):
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

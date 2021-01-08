@@ -1,0 +1,1 @@
+qsub -q ibm-nehalem.q -pe openmpi 4 -cwd ./run_mpi.sh
