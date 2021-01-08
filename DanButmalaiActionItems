@@ -1,0 +1,6 @@
+9 November - 15 November :alegere tema
+16 November - 22 November :compilare, gasire date de intrare
+23 November - 29 November :am scris un script in python ce sparge un video in imagini, le face upscale si le convertesti in formatul necesar identificarii muchiilor
+30 November - 6 December : 1 decembrie
+7 December - 13 December :primele incercari de paralelizare (fiecare thread prelucra portiunea sa de imagine a ramas ca nodul master sa stranga informatia de la celelalte threaduri)
+14 December - 20 December :am rezolvat combinarea rezultatelor in nodul master 
